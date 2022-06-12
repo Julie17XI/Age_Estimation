@@ -19,3 +19,4 @@ runner.txt
 test.py
 train.py
 model_weights/
+wiki_crop/
