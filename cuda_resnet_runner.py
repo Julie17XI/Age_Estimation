@@ -188,8 +188,8 @@ def get_balanced_data(data_folder, train_save_path='./data/train_new.tsv', test_
                     train_size = math.ceil(dataset_sample_size * 0.8)
                     for index in range(train_size):
                         balanced_train_data.append(dataset_race_age_information[dataset][race][age][index])
-                    for index in range(train_size, dataset_sample_size):
-                        balanced_test_data.append(dataset_race_age_information[dataset][race][age][index])
+                    # for index in range(train_size, dataset_sample_size):
+                    #     balanced_test_data.append(dataset_race_age_information[dataset][race][age][index])
                     #race_select_size, race_threshold, benchmark_datasets_num = update(race_select_size, race_threshold, dataset_sample_size, benchmark_datasets_num)
                 else:
                     race_select_size = dataset_sample_size
@@ -198,15 +198,13 @@ def get_balanced_data(data_folder, train_save_path='./data/train_new.tsv', test_
                     #benchmark_datasets_num -= 1
                     for index in range(train_size):
                         balanced_train_data.append(dataset_race_age_information[dataset][race][age][index])
-                    for index in range(train_size, dataset_sample_size):
-                        balanced_test_data.append(dataset_race_age_information[dataset][race][age][index])
+                    # for index in range(train_size, dataset_sample_size):
+                    #     balanced_test_data.append(dataset_race_age_information[dataset][race][age][index])
     return balanced_test_data, balanced_train_data
 
 #
 # Do all the processing on custom dataset
 #
-def resize_custom_image(image_path):
-    pass
 
 def flip_custom_image(image_path):
     '''Flip an image and save to same directory'''
@@ -256,7 +254,6 @@ def get_supplementary_data(age_dict, train_save_path='./data/train_new.tsv', tes
         num_images = len(age_dict[age])
         items = age_dict[age]
         train_size = math.floor(num_images * 0.8)
-        test_size = num_images - train_size
         i = train_size
         while i > 0:
             index = random.randint(0, i)
@@ -532,8 +529,8 @@ class Img_Dataset_Iter(Dataset):
         def load_image(idx):
             cur_img_arr = img_paths[idx]
             img = Image.open(cur_img_arr)
-            if img.mode=='L':
-              img=img.convert("RGB")
+            #if img.mode=='L':
+            img=img.convert("RGB")
             newimg=img.resize(img_size)
             img.load()
             return newimg
@@ -708,10 +705,10 @@ clean()
 
 #
 balanced_test_data, balanced_train_data = get_balanced_data(dataset_folder, train_save_path, test_save_path)
-# argument_custom_dataset(custom_dataset_path)
+argument_custom_dataset(custom_dataset_path)
 # dict = get_custom_dataset_age_dictionary(custom_dataset_path)
 # print(f"age_dict: {dict}")
-# load_custom_data(custom_dataset_path)
+load_custom_data(custom_dataset_path)
 convert_data_to_tabular(balanced_train_data, balanced_test_data, )
 #get_balanced_data(data_folder, train_save_path, test_save_path)
 
