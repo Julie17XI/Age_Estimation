@@ -2,10 +2,10 @@ import csv
 import sys
 import os
 
-import torch
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
+from tensorflow.python.client import device_lib
 # Turn off all Warnings and Information messages
 #   0 = all messages are logged (default behavior)
 #   1 = INFO messages are not printed
@@ -15,6 +15,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 print("Using Python version: " + sys.version)
+#print("Is GPU avaliable: ", tf.test.is_gpu_available())
 
 VERBOSE = False
 print("********************************")
@@ -186,6 +187,7 @@ def plotPerson(name, images, labels):
 #
 # Start of main
 #
+print(device_lib.list_local_devices())
 
 if len(sys.argv) < 2:
   print("Usage: TrainData.py [-verbose] keynames")
