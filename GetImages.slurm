@@ -3,7 +3,7 @@
 #SBATCH -J GetImages.py
 #SBATCH -o GetImages.txt
 #SBATCH -p gpu2v100
-#SBATCH -t 20:00:00
+#SBATCH -t 40:00:00
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH --mail-type=ALL
